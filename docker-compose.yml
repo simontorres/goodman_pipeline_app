@@ -11,7 +11,7 @@ services:
       context: file_watch
     volumes:
       - type: bind
-        source: /user/simon/Downloads/testing_watchdog
+        source: /home/simon/testing_watchdog
         target: /app/data
 
   web_app:

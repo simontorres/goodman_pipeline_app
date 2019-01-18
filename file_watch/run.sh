@@ -2,7 +2,7 @@
 
 echo "hello"
 
-ls /app/host/data
+ls -R /app/data
 
 echo "OK"
 
