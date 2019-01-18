@@ -1,0 +1,26 @@
+version: "3.2"
+services:
+
+  rabbit:
+    image: rabbitmq:3.6-management
+    ports:
+      - "15672:15672"
+
+  file_watch:
+    build:
+      context: file_watch
+    volumes:
+      - type: bind
+        source: /user/simon/Downloads/testing_watchdog
+        target: /app/data
+
+  web_app:
+    build:
+      context: web_app
+    ports:
+      - "4000:4000"
+    networks:
+      - webnet
+
+networks:
+  webnet:
