@@ -3,24 +3,29 @@ services:
 
   rabbit:
     image: rabbitmq:3.6-management
+    hostname: "rabbit"
     ports:
       - "15672:15672"
+      - "5672:5672"
 
   file_watch:
     build:
       context: file_watch
     volumes:
       - type: bind
-        source: /home/simon/testing_watchdog
+        source: /pipeline
         target: /app/data
+    depends_on:
+      - rabbit
 
   web_app:
     build:
       context: web_app
     ports:
       - "4000:4000"
-    networks:
-      - webnet
 
-networks:
-  webnet:
+#  worker:
+#    build:
+#      context: worker
+#    depends_on:
+#      - rabbit

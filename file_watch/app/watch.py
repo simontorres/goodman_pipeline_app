@@ -4,6 +4,8 @@ import logging
 import os
 import pyinotify
 
+from .celery import reduce
+
 
 class EventHandler(pyinotify.ProcessEvent):
 
@@ -22,6 +24,7 @@ class EventHandler(pyinotify.ProcessEvent):
         self.log.info("File created: {:s}.".format(
             os.path.basename(event.pathname)))
         print(event.pathname)
+        # reduce.delay(event.pathname)
 
 
 class FileSystemEventNotifier(object):
@@ -38,6 +41,6 @@ class FileSystemEventNotifier(object):
 
         print("Starting loop")
         print(os.getcwd())
-        self._watch_manager.add_watch('/app/data/data', self._file_events)
+        self._watch_manager.add_watch('/pipeline/data', self._file_events)
 
         self._notifier.loop()
