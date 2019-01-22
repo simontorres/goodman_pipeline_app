@@ -11,10 +11,14 @@ services:
   file_watch:
     build:
       context: file_watch
+    user: observer:observer
+    environment:
+      - CELERY_BROKER_URL=amqp://guest:guest@rabbit
+      - DATA_DIRECTORY=/app/pipeline/data
     volumes:
       - type: bind
         source: /pipeline
-        target: /app/data
+        target: /app/pipeline
     depends_on:
       - rabbit
 
