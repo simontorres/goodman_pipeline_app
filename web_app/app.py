@@ -17,7 +17,7 @@ thread_stop_event = Event()
 
 class RandomThread(Thread):
     def __init__(self):
-        self.delay = 10
+        self.delay = 1
         super(RandomThread, self).__init__()
 
     def randomNumberGenerator(self):
@@ -30,7 +30,7 @@ class RandomThread(Thread):
         while not thread_stop_event.isSet():
             number = round(random()*10, 3)
             print(number)
-            socketio.emit('newnumber', {'number': number}, namespace='/test')
+            socketio.emit('newnumber', {'number': 'hola: {}'.format(number)}, namespace='/test')
             sleep(self.delay)
 
     def run(self):

@@ -12,7 +12,7 @@ class Publisher(object):
         parameters = pika.ConnectionParameters(self.config['host'],
                                                self.config['port'],
                                                self.config['virtualHost'],
-                                               credentials, ssl=True)
+                                               credentials, ssl=False)
 
         return pika.BlockingConnection(parameters)
 
