@@ -13,26 +13,12 @@ services:
       - RABBITMQ_DEFAULT_PASS
       - RABBITMQ_DEFAULT_VHOST
 
-  publisher:
-    build:
-      context: publisher
-    depends_on:
-      - rabbit
-    restart: always
-
-
-  consumer:
-    build:
-      context: consumer
-    depends_on:
-      - rabbit
-    restart: always
-
   file_watch:
     build:
       context: file_watch
     user: observer:observer
     environment:
+      - CELERY_BACKEND_URL
       - CELERY_BROKER_URL
       - DATA_DIRECTORY
     volumes:
@@ -41,6 +27,7 @@ services:
         target: /app/pipeline
     depends_on:
       - rabbit
+    restart: always
 
   web_app:
     build:
@@ -49,9 +36,25 @@ services:
       - "4000:4000"
     depends_on:
       - rabbit
+    restart: always
 
 #  worker:
 #    build:
 #      context: worker
 #    depends_on:
 #      - rabbit
+
+#  publisher:
+#    build:
+#      context: publisher
+#    depends_on:
+#      - rabbit
+#    restart: always
+#
+#
+#  consumer:
+#    build:
+#      context: consumer
+#    depends_on:
+#      - rabbit
+#    restart: always

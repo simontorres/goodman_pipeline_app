@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3.6
 
 RUN groupadd -r observer && useradd -r -g observer observer
 
