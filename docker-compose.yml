@@ -2,7 +2,8 @@ version: "3.2"
 services:
 
   rabbit:
-    image: rabbitmq:3.6-management
+    build:
+      context: rabbitmq-server
     hostname: "rabbit"
     ports:
       - "15672:15672"
