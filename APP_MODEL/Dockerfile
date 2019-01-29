@@ -4,12 +4,9 @@ RUN apt-get update && apt-get clean
 
 WORKDIR /app
 
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+COPY . ./
 
-COPY config.yml
-COPY run.sh ./
-COPY app.py ./
+RUN pip install --no-cache-dir -r requirements.txt
 
 RUN chmod +x ./run.sh
 

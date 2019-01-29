@@ -1,12 +1,14 @@
 from __future__ import absolute_import
+
 from publisher import Publisher
 from loremipsum import get_sentence
+from pika.exceptions import ConnectionClosed, ChannelClosed
 
 import time
 
-config = {'userName': 'guest',
-          'password': 'guest',
-          'host': 'localhost',
+config = {'userName': 'user',
+          'password': 'pass',
+          'host': 'rabbit',
           'port': 5672,
           'virtualHost': 'rvhost',
           'exchangeName': 'exchange',
@@ -16,9 +18,23 @@ config = {'userName': 'guest',
 
 if __name__ == '__main__':
 
-    pub = Publisher(config)
-    for i in range(100):
-        sentence = get_sentence()
-        sentence = sentence.replace("b'", "")
-        pub.publish(message=get_sentence())
-        time.sleep(1)
+    while True:
+        try:
+            publisher = Publisher(config)
+            for i in range(10):
+                sentence = get_sentence()
+                publisher.publish(message=sentence)
+                time.sleep(1)
+        except ConnectionClosed as ccl:
+            print(ccl)
+        except ChannelClosed as chc:
+            print(chc)
+
+        finally:
+            print("Retry in 5")
+            time.sleep(5)
+        # except ChannelClosed as chc:
+        #     print(chc)
+        #     print("Retry in 5")
+        #     time.sleep(5)
+

@@ -1,15 +1,18 @@
 from __future__ import absolute_import
 
+from pika.exceptions import ConnectionClosed
 from consumer import Consumer
+
+import time
 
 
 def callback_ftn(arg):
     print(arg)
 
 
-config = {'userName': 'guest',
-          'password': 'guest',
-          'host': 'localhost',
+config = {'userName': 'user',
+          'password': 'pass',
+          'host': 'rabbit',
           'port': 5672,
           'virtualHost': 'rvhost',
           'queueName': 'default',
@@ -17,7 +20,7 @@ config = {'userName': 'guest',
           'routingKey': 'routingkey',
           'exchangeType': 'direct',
           'exchangeOptions': {'passive': False,
-                              'durable': False,
+                              'durable': True,
                               'autoDelete': True,
                               'internal': False},
           'queueOptions': {'passive': False,
@@ -26,9 +29,14 @@ config = {'userName': 'guest',
                            'autoDelete': True}
           }
 
-print(config)
+# print(config)
 if __name__ == '__main__':
-
-    with Consumer(config) as csmr:
-
-        csmr.consume(message_received_callback=callback_ftn)
+    while True:
+        try:
+            with Consumer(config) as csmr:
+                print("1 test print from consumer instantiated")
+                csmr.consume(message_received_callback=callback_ftn)
+        except ConnectionClosed:
+            print("Unable to connect")
+            print("Retry in 5")
+            time.sleep(5)
