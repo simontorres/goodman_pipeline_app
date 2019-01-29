@@ -29,11 +29,20 @@ services:
       - rabbit
     restart: always
 
-  web_app:
+#  web_app:
+#    build:
+#      context: web_app
+#    ports:
+#      - "4000:4000"
+#    depends_on:
+#      - rabbit
+#    restart: always
+
+  node_app:
     build:
-      context: web_app
+      context: nodejs_app
     ports:
-      - "4000:4000"
+      - "4000:8080"
     depends_on:
       - rabbit
     restart: always
