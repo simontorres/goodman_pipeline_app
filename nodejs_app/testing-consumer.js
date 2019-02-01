@@ -1,4 +1,4 @@
-var RabbitMQConsumer = require('./rabbitmq-consumer'); //specify the name of the file here containing the code we just wrote
+var RabbitMQConsumer = require('./server/rabbitmq-consumer'); //specify the name of the file here containing the code we just wrote
 
 var configuration = {
     userName: "user",

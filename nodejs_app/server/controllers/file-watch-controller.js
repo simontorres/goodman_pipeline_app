@@ -30,8 +30,19 @@ module.exports.watch = function(req, res) {
     });
 
     consumer.consume();
-}
+    res.json({'success': 'true'});
+};
 
 module.exports.list = function (req, res) {
-    res.json({'name': 'simon'})
-}
+    res.json([
+        {'OBJECT': 'Focus sequence',
+         'OBSTYPE': 'OBJECT',
+         'RA': '22:25:11.471',
+         'DEC': '22:30:37.003'},
+        {'OBJECT': 'bias',
+         'OBSTYPE': 'BIAS',
+         'RA': '22:25:11.471',
+         'DEC': '22:30:37.003'}
+
+    ])
+};
