@@ -61,9 +61,9 @@ services:
     restart: always
 
 
-  consumer:
-    build:
-      context: consumer
-    depends_on:
-      - rabbit
-    restart: always
+#  consumer:
+#    build:
+#      context: consumer
+#    depends_on:
+#      - rabbit
+#    restart: always
