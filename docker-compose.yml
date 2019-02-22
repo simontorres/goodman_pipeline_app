@@ -53,14 +53,14 @@ services:
 #    depends_on:
 #      - rabbit
 
-  publisher:
-    build:
-      context: publisher
-    depends_on:
-      - rabbit
-    restart: always
-
-
+#  publisher:
+#    build:
+#      context: publisher
+#    depends_on:
+#      - rabbit
+#    restart: always
+#
+#
 #  consumer:
 #    build:
 #      context: consumer
