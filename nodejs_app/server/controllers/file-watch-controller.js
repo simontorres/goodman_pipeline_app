@@ -42,6 +42,10 @@ module.exports.list = function (req, res) {
         {'OBJECT': 'bias',
          'OBSTYPE': 'BIAS',
          'RA': '22:25:11.471',
+         'DEC': '22:30:37.003'},
+        {'OBJECT': 'Flat',
+         'OBSTYPE': 'FLAT',
+         'RA': '22:25:11.471',
          'DEC': '22:30:37.003'}
 
     ])

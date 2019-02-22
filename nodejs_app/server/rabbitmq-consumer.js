@@ -17,7 +17,7 @@ RabbitMQConsumer.prototype.consume = function() {
     var self = this;
     var config = priv.get(this);
     var uri = "amqp://" + config.userName + ":" + config.password + "@" + config.host + ":" + config.port + "/" + config.virtualHost;
-    console.log(uri)
+    console.log(uri);
 
     var openConnection = function() {
         amqp.connect(encodeURI(uri)).then(function (conn) {
