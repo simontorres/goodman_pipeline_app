@@ -19,7 +19,9 @@ const corsOptions = {
     origin: '*'
 };
 
-var db = monk('db:27017/testdb');
+var db = monk('db:27017/file_records');
+
+app.use(bodyParser.json());
 
 app.use(function (req, res, next) {
     req.db = db;
@@ -28,9 +30,9 @@ app.use(function (req, res, next) {
 
 // API routes
 
-app.get('/api/files', cors(corsOptions), fileController.list);
+app.get('/api/files', cors(corsOptions), fileController.list_raw);
 // app.get('/api/files', fileController.watch);
-app.post('/api/files', cors(corsOptions), fileController.watch);
+app.post('/api/files', cors(corsOptions), fileController.add_raw);
 
 app.listen(PORT, HOST);
 console.log(`running on http://${HOST}:${PORT}`);

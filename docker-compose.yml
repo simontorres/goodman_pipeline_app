@@ -37,9 +37,10 @@ services:
       - "27017:27017"
   # enable authorization access
 
-  app:
+  api:
     build:
-      context: app
+      context: api
+    hostname: api
     ports:
       - "4000:8080"
     depends_on:
@@ -47,3 +48,14 @@ services:
     restart: always
     links:
       - db
+
+  web:
+    build:
+      context: web
+    ports:
+      - "3000:8080"
+    depends_on:
+      - rabbit
+    restart: always
+    links:
+      - api

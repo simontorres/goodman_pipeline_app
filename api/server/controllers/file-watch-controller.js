@@ -23,30 +23,31 @@ var configuration = {
 };
 
 
-module.exports.watch = function(req, res) {
-    var consumer = new RabbitMQConsumer(configuration);
-    consumer.on('received', function(messageText) {
-        console.log('Message received:', messageText);
-    });
+// module.exports.watch = function(req, res) {
+//     var consumer = new RabbitMQConsumer(configuration);
+//     consumer.on('received', function(messageText) {
+//         console.log('Message received:', messageText);
+//     });
+//
+//     consumer.consume();
+//     res.json({'success': 'true'});
+// };
 
-    consumer.consume();
-    res.json({'success': 'true'});
+module.exports.add_raw = function(req, res) {
+    var data = req.body;
+    console.log(data);
+
+    var db = req.db;
+    var collection = db.get('raw_files');
+
+    collection.insert(data);
+    res.sendStatus(200);
 };
 
-module.exports.list = function (req, res) {
-    res.json([
-        {'OBJECT': 'Focus sequence',
-         'OBSTYPE': 'OBJECT',
-         'RA': '22:25:11.471',
-         'DEC': '22:30:37.003'},
-        {'OBJECT': 'bias',
-         'OBSTYPE': 'BIAS',
-         'RA': '22:25:11.471',
-         'DEC': '22:30:37.003'},
-        {'OBJECT': 'Flat',
-         'OBSTYPE': 'FLAT',
-         'RA': '22:25:11.471',
-         'DEC': '22:30:37.003'}
-
-    ])
+module.exports.list_raw = function (req, res) {
+    var db = req.db;
+    var collection = db.get('raw_files');
+    collection.find({}, {}, function (e, docs){
+        res.json(docs);
+    });
 };
