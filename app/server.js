@@ -4,7 +4,8 @@ var express          = require('express'),
     app              = express(),
     bodyParser       = require('body-parser'),
     mongoose         = require('mongoose'),
-    fileController   = require('./server/controllers/file-watch-controller');
+    fileController   = require('./server/controllers/file-watch-controller'),
+    monk             = require('monk');
 
 
 
@@ -12,6 +13,13 @@ var express          = require('express'),
 
 const PORT = 8080;
 const HOST = '0.0.0.0';
+
+var db = monk('db:27017/testdb');
+
+app.use(function (req, res, next) {
+    req.db = db;
+    next();
+});
 
 // App
 

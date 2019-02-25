@@ -29,32 +29,21 @@ services:
       - rabbit
     restart: always
 
-  node_app:
+  db:
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"
+  # enable authorization access
+
+  app:
     build:
-      context: nodejs_app
+      context: app
     ports:
       - "4000:8080"
     depends_on:
       - rabbit
     restart: always
-
-#  worker:
-#    build:
-#      context: worker
-#    depends_on:
-#      - rabbit
-
-#  publisher:
-#    build:
-#      context: publisher
-#    depends_on:
-#      - rabbit
-#    restart: always
-#
-#
-#  consumer:
-#    build:
-#      context: consumer
-#    depends_on:
-#      - rabbit
-#    restart: always
+    links:
+      - db

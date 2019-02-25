@@ -3,7 +3,7 @@ var RabbitMQConsumer = require('./server/rabbitmq-consumer'); //specify the name
 var configuration = {
     userName: "user",
     password: "abc123",
-    host: "rabbitmq.mydomain.com",
+    host: "rabbit",
     port: 5671,
     virtualHost: "home",
     exchangeName: "home_exchange",
