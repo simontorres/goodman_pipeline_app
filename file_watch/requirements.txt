@@ -1,3 +1,4 @@
 pyinotify
 celery
 ccdproc
+requests
