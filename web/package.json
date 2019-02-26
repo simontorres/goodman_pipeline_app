@@ -1,11 +1,11 @@
 {
-  "name": "docker_web_app",
+  "name": "web_app",
   "version": "0.0.1",
   "description": "Node.js on Docker",
   "author": "Simon Torres <storres@ctio.noao.edu>",
-  "main": "server.js",
+  "main": "webapp.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node webapp.js"
   },
   "dependencies": {
     "amqplib": "^0.5.3",
