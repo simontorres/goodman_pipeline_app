@@ -1,7 +1,8 @@
-FROM rabbitmq:3.6-management
+FROM rabbitmq:3.7-management
 
-RUN service rabbitmq-server start
+#RUN service rabbitmq-server start
 
 ADD init.sh /init.sh
 RUN chmod +x /init.sh
-CMD ["./init.sh"]
+#RUN sh ./init.sh
+CMD ["/init.sh"]
