@@ -45,7 +45,7 @@ app.get('/api/files', cors(corsOptions), fileController.list_raw);
 app.post('/api/files', cors(corsOptions), fileController.add_raw);
 
 app.listen(PORT, HOST);
-console.log(`running on http://${HOST}:${PORT}`);
+console.log(`running API on http://${HOST}:${PORT}`);
 
 
 
