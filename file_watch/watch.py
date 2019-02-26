@@ -41,8 +41,12 @@ class FileSystemEventNotifier(object):
     def __call__(self, *args, **kwargs):
 
         print("Starting loop")
-        print(os.getcwd())
-        print(os.listdir(os.environ['DATA_DIRECTORY']))
+        # print(os.getcwd())
+        previous_content = os.listdir(os.environ['DATA_DIRECTORY'])
+        if len(previous_content) > 0:
+            for _file in previous_content:
+                result = reduce.delay(os.path.join(os.environ['DATA_DIRECTORY'], _file))
+        # print(os.listdir(os.environ['DATA_DIRECTORY']))
         self._watch_manager.add_watch(os.environ['DATA_DIRECTORY'], self._file_events)
 
         self._notifier.loop()
