@@ -1,26 +1,28 @@
-RabbitMQConsumer = require('../rabbitmq-consumer'); //specify the name of the file here containing the code we just wrote
-
-var configuration = {
-    userName: "user",
-    password: "pass",
-    host: "rabbit",
-    port: 5672,
-    virtualHost: "rvhost",
-    exchangeName: "exchange",
-    exchangeType: "fanout",
-    exchangeOptions: {
-        durable: false,
-        internal: false,
-        autoDelete: true
-    },
-    queueName: "nodeapp",
-    queueOptions: {
-        exclusive: true,
-        durable: true,
-        autoDelete: false
-    },
-    routingKey: "routingkey"
-};
+// var EventEmitter = require('events').EventEmitter;
+// var util = require('util');
+// RabbitMQConsumer = require('../rabbitmq-consumer'); //specify the name of the file here containing the code we just wrote
+//
+// var configuration = {
+//     userName: "user",
+//     password: "pass",
+//     host: "rabbit",
+//     port: 5672,
+//     virtualHost: "rvhost",
+//     exchangeName: "exchange",
+//     exchangeType: "fanout",
+//     exchangeOptions: {
+//         durable: false,
+//         internal: false,
+//         autoDelete: true
+//     },
+//     queueName: "nodeapp",
+//     queueOptions: {
+//         exclusive: true,
+//         durable: true,
+//         autoDelete: false
+//     },
+//     routingKey: "routingkey"
+// };
 
 
 // module.exports.watch = function(req, res) {
@@ -41,6 +43,7 @@ module.exports.add_raw = function(req, res) {
     var collection = db.get('raw_files');
 
     collection.insert(data);
+    // self.emit('new_entry', "A new entry was added");
     res.sendStatus(200);
 };
 

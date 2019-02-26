@@ -4,11 +4,21 @@ var express          = require('express'),
     cors             = require('cors'),
     app              = express(),
     bodyParser       = require('body-parser'),
-    mongoose         = require('mongoose'),
     fileController   = require('./server/controllers/file-watch-controller'),
     monk             = require('monk');
+    // server           = require('http').createServer(app),
+    // io               = require('socket.io')(server);
 
 
+// io.on('connection', function (client) {
+//
+//     client.on('join', function(data) {
+//         console.log('Client connected...');
+//
+//         console.log(data);
+//         client.emit('messages', 'Hello from server');
+//     });
+// });
 
 //constants
 
