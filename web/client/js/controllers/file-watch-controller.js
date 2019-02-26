@@ -1,7 +1,13 @@
-app.controller('fileWatchController', ['$scope', '$resource', function ($scope, $resource) {
-    var Files = $resource('http://ctioy9.ctio.noao.edu:4000/api/files');
+app.controller('fileWatchController', ['$scope', '$resource', '$interval', function ($scope, $resource, $interval) {
 
-    Files.query(function (results) {
-        $scope.files = results;
-    })
+    $scope.update_data = function () {
+        var Files = $resource('/api/rawdata');
+
+        Files.query(function (results) {
+            $scope.files = results;
+            console.log('Updating');
+        });
+    };
+    $scope.update_data();
+    $interval($scope.update_data, 3000);
 }]);
