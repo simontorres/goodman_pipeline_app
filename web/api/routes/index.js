@@ -6,10 +6,11 @@ var express = require('express');
 var jwt = require('jsonwebtoken');
 var router = express.Router();
 var User = require('../models/User');
-
+var request = require('request');
 
 
 router.post('/signup', function (req, res) {
+    console.log(req);
     if (!req.body.username || !req.body.password) {
         res.json({success: false, msg: 'Please pass username and password.'});
     } else {
@@ -52,6 +53,17 @@ router.post('/signin', function(req, res) {
 
 
 // router.post('/book
+
+router.get('/files', function(req, res) {
+    request.get({url: 'http://api:8080/api/files', json:true}, function (error, response, data)  {
+        if (error) {
+            throw error;
+        }
+
+        res.json(data);
+
+    });
+});
 
 
 router.get('/rawfiles', passport.authenticate('jwt', { session: false}), function(req, res) {
