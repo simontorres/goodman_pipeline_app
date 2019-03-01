@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<div data-ng-show="selected_file" >
+    <div class="card">
+        <div class="card-header">
+            Detailed Info For: {{ selected_file.file_name }}
+        </div>
+        <div class="card-body">
+            <li ng-repeat="(attribute, value) in selected_file">
+                <div>
+                    {{ attribute }}: {{ value }}
+                </div>
+            </li>
+        </div>
+    </div>
+</div>

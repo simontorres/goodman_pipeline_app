@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<div data-ng-show="files.length" >
+    <div class="card">
+        <div class="card-header">Observed Files</div>
+        <div class="card-body scrollable">
+            <nav class="flex-column" >
+                <div class="list-group list-group-flush">
+                    <div class="nav-item" ng-repeat="file in files | reverse">
+                        <a  ng-href="#" class="list-group-item list-group-item-action" ng-class="{active: is_file_selected(file)}">
+                        <div ng-click="select_file(file)">{{ file.file_name }}</div>
+                       </a>
+                   </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+</div>
