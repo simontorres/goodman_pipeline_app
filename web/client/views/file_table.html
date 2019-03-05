@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <div data-ng-show="files.length" >
-    <div class="card">
+    <div class="card"  ng-controller="fileListPaginationController">
         <div class="card-header">Observed Files</div>
         <div class="card-body scrollable">
             <nav class="flex-column" >
                 <div class="list-group list-group-flush">
-                    <div class="nav-item" ng-repeat="file in files | reverse">
+                    <div class="nav-item" ng-repeat="file in currentPage">
                         <a  ng-href="#" class="list-group-item list-group-item-action" ng-class="{active: is_file_selected(file)}">
                         <div ng-click="select_file(file)">{{ file.file_name }}</div>
                        </a>
@@ -14,7 +14,12 @@
             </nav>
         </div>
         <div class="card-footer">
-            <ul uib-pagination total-items="totalFiles" ng-model="currentPage"></ul>
+            <ul class="pagination">
+                 <li class="page-item" ng-repeat="page in allPagesNumbers" ng-class="{active: is_page_active(page)}">
+                     <div ng-click="select_page(page)" class="page-link" href="#">{{ page }}</div>
+                 </li>
+            </ul>
+
         </div>
     </div>
 

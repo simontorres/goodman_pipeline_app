@@ -4,9 +4,9 @@ app.controller('fileWatchController', ['$scope', '$resource', '$interval', funct
 
         Files.query(function (results) {
             if (results.length > 0) {
-                $scope.files = results;
+                $scope.files = results.reverse();
                 if ($scope.selected_file == null) {
-                    $scope.selected_file = $scope.files.slice(-1)[0];
+                    $scope.selected_file = $scope.files[0];
                 }
             } else {
                 $scope.files = null;
@@ -30,3 +30,43 @@ app.controller('fileWatchController', ['$scope', '$resource', '$interval', funct
 
 }]);
 
+app.controller('fileListPaginationController', function($scope) {
+    $scope.currentPageNumber = 1;
+    $scope.currentPage = [];
+    $scope.itemsPerPage = 14;
+    $scope.totalPages = Math.ceil($scope.files.length / $scope.itemsPerPage);
+    $scope.allPagesNumbers = [];
+    $scope.allPages = [];
+
+    $scope.create_pages = function () {
+        var i;
+        var startPage = 0;
+        var endPage = startPage + $scope.itemsPerPage;
+        for (i = 1; i <= $scope.totalPages; i++) {
+            $scope.allPagesNumbers.push(i);
+            $scope.allPages.push($scope.files.slice(startPage, endPage));
+            startPage = endPage;
+            endPage = startPage + $scope.itemsPerPage;
+
+
+        }
+    };
+
+    $scope.select_page = function (page) {
+        $scope.currentPageNumber = page;
+        $scope.currentPage = $scope.allPages[page - 1];
+    };
+
+    $scope.is_page_active = function (page) {
+        return $scope.currentPageNumber === page;
+    };
+
+    $scope.create_pages();
+    $scope.select_page($scope.currentPageNumber);
+
+
+
+
+
+
+});
