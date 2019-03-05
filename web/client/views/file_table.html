@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <div data-ng-show="files.length" >
-    <div class="card"  ng-controller="fileListPaginationController">
-        <div class="card-header">Observed Files</div>
+    <div class="card">
+        <div class="card-header">Observed Files
+            <span style="float: right">
+                Follow <input type="checkbox" ng-model="follow" ng-click="activate_follow()">
+            </span>
+        </div>
         <div class="card-body scrollable">
             <nav class="flex-column" >
                 <div class="list-group list-group-flush">
@@ -14,11 +18,14 @@
             </nav>
         </div>
         <div class="card-footer">
-            <ul class="pagination">
+            <div data-ng-show="allPagesNumbers.length > 1">
+                <ul class="pagination">
                  <li class="page-item" ng-repeat="page in allPagesNumbers" ng-class="{active: is_page_active(page)}">
                      <div ng-click="select_page(page)" class="page-link" href="#">{{ page }}</div>
                  </li>
             </ul>
+            </div>
+
 
         </div>
     </div>
