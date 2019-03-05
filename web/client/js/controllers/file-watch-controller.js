@@ -27,6 +27,35 @@ app.controller('fileWatchController', ['$scope', '$resource', '$interval', funct
 
     };
 
+    $scope.optimize_number_of_pages = function() {
+        if ($scope.totalPages < 6) {
+            $scope.pagesToShow = $scope.allPagesNumbers;
+        } else {
+          var first_half = $scope.allPagesNumbers
+                .slice(Math.max($scope.allPagesNumbers[0] - 1, $scope.currentPageNumber - 3),
+                    Math.min($scope.currentPageNumber + 3, $scope.currentPageNumber));
+
+            var second_half = $scope.allPagesNumbers
+                .slice(Math.max($scope.currentPageNumber, $scope.currentPageNumber - 3),
+                    Math.min($scope.currentPageNumber + 3, $scope.allPagesNumbers.slice(-1)[0]));
+
+            $scope.pagesToShow = first_half.concat(second_half);
+
+        }
+        $scope.pagesToShow = new Array(...new Set($scope.pagesToShow));
+
+        if ($scope.pagesToShow[0] !== 1) {
+            $scope.pagesToShow.unshift('...');
+        };
+
+        if ($scope.pagesToShow.slice(-1)[0] !== $scope.allPagesNumbers.slice(-1)[0]) {
+            $scope.pagesToShow.push('...');
+        };
+
+        $scope.pagesToShow.push('Last');
+        $scope.pagesToShow.unshift('First');
+    };
+
     $scope.create_pages = function () {
         // $scope.files = $scope.update_data();
         if ($scope.files != null) {
@@ -42,8 +71,8 @@ app.controller('fileWatchController', ['$scope', '$resource', '$interval', funct
                 startPage = endPage;
                 endPage = startPage + $scope.itemsPerPage;
 
-
             }
+            $scope.optimize_number_of_pages();
         } else {
             console.log('files does not exist yet!');
         }
@@ -61,10 +90,16 @@ app.controller('fileWatchController', ['$scope', '$resource', '$interval', funct
     };
 
     $scope.select_page = function (page) {
-        $scope.currentPageNumber = page;
-        if ($scope.allPages != null) {
-            $scope.currentPage = $scope.allPages[page - 1];
+        if (typeof page == "number") {
+            $scope.currentPageNumber = page;
+        } else if (page === 'First') {
+            $scope.currentPageNumber = $scope.allPagesNumbers[0];
+        } else if (page === 'Last') {
+            $scope.currentPageNumber = $scope.allPagesNumbers.slice(-1)[0];
         }
+        if ($scope.allPages != null) {
+                $scope.currentPage = $scope.allPages[page - 1];
+            }
     };
 
     $scope.is_page_active = function (page) {

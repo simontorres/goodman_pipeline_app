@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<div data-ng-show="files.length" >
+<div ng-if="files.length" >
     <div class="card">
-        <div class="card-header">Observed Files
+        <div class="card-header">
+            <span style="float: left;">
+                Observed Files
+            </span>
             <span style="float: right">
                 Follow <input type="checkbox" ng-model="follow" ng-click="activate_follow()">
             </span>
@@ -19,9 +22,9 @@
         </div>
         <div class="card-footer">
             <div data-ng-show="allPagesNumbers.length > 1">
-                <ul class="pagination">
-                 <li class="page-item" ng-repeat="page in allPagesNumbers" ng-class="{active: is_page_active(page)}">
-                     <div ng-click="select_page(page)" class="page-link" href="#">{{ page }}</div>
+                <ul class="pagination justify-content-center">
+                 <li class="page-item" ng-repeat="pageNumber in pagesToShow track by $index" ng-class="{active: is_page_active(pageNumber)}">
+                     <div ng-click="select_page(pageNumber)" class="page-link" href="#">{{ pageNumber }}</div>
                  </li>
             </ul>
             </div>
