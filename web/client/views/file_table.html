@@ -22,8 +22,8 @@
     </div>
     <div class="card-footer">
         <div data-ng-show="allPagesNumbers.length > 1">
-            <ul class="pagination justify-content-center">
-             <li class="page-item" ng-repeat="pageNumber in pagesToShow track by $index" ng-class="{active: is_page_active(pageNumber)}">
+            <ul class="pagination pagination-sm justify-content-center">
+             <li class="page-item" ng-repeat="pageNumber in pagesToShow track by $index" ng-class="{active: is_page_active(pageNumber), disabled: should_be_disabled(pageNumber)}">
                  <div ng-click="select_page(pageNumber)" class="page-link" href="#">{{ pageNumber }}</div>
              </li>
         </ul>

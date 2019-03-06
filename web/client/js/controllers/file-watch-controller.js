@@ -79,6 +79,20 @@ app.controller('fileWatchController', ['$scope', '$resource', '$interval', funct
 
     };
 
+    $scope.should_be_disabled = function (pageNumber) {
+        if  (typeof pageNumber === 'string') {
+            if (pageNumber === '...') {
+                return true;
+            } else if (pageNumber === 'First' && $scope.pagesToShow.includes(1)) {
+                return true;
+            } else if (pageNumber === 'Last' && $scope.pagesToShow.includes($scope.allPagesNumbers.slice(-1)[0])) {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+
 
      $scope.select_file = function (file) {
          $scope.follow = false;
@@ -109,10 +123,6 @@ app.controller('fileWatchController', ['$scope', '$resource', '$interval', funct
     $scope.activate_follow = function() {
         $scope.follow = !$scope.follow;
     }
-
-    // startup execution
-
-    // $scope.create_pages();
 
 
     $interval($scope.update_data, 3000);
