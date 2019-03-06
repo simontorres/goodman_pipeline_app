@@ -14,19 +14,32 @@
 <body>
 
 <ng-include src="'views/navbar.html'"></ng-include>
-
-<div class="container-fluid" style="margin-top:80px; height: 90%">
-
-    <div class="row flex-xl-nowrap">
-        <div class="col-12 col-md-4 col-xl-3">
-            <ng-include src="'views/file_table.html'"></ng-include>
-        </div>
-        <div class="col-md-8 col-xl-9" id="file_detail">
-            <ng-include src="'views/file_info.html'"></ng-include>
+<div ng-if="!files.length">
+    <div class="container h-100" style="margin-top: 100px;">
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="col-lg-1">
+                <div class="spinner-border"></div>
+            </div>
+            <div class="col-lg-5">
+                <p class="lead"> Waiting for Data</p>
+            </div>
         </div>
     </div>
-
 </div>
+<div ng-if="files.length" >
+    <div class="container-fluid" style="margin-top:80px; height: 90%">
+        <div class="row flex-xl-nowrap">
+            <div class="col-12 col-md-4 col-xl-3">
+                <ng-include src="'views/file_table.html'"></ng-include>
+            </div>
+            <div class="col-md-8 col-xl-9" id="file_detail">
+                <ng-include src="'views/file_info.html'"></ng-include>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <ng-include src="'views/login.html'"></ng-include>
 
