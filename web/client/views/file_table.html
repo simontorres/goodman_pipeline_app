@@ -3,7 +3,7 @@
 <div class="card">
     <div class="card-header">
         <span style="float: left;">
-            Observed Files
+            Observed Files  <span class="badge badge-primary">{{ files.length }}</span>
         </span>
         <span style="float: right">
             Follow <input type="checkbox" ng-model="follow" ng-click="activate_follow()">
@@ -12,7 +12,7 @@
     <div class="card-body scrollable">
         <nav class="flex-column" >
             <div class="list-group list-group-flush">
-                <div class="nav-item" ng-repeat="file in currentPage">
+                <div class="nav-item" ng-repeat="file in files.slice(pagination.pageStart, pagination.pageEnd)">
                     <a  ng-href="#" class="list-group-item list-group-item-action" ng-class="{active: is_file_selected(file)}">
                     <div ng-click="select_file(file)">{{ file.file_name }}</div>
                    </a>
@@ -21,15 +21,19 @@
         </nav>
     </div>
     <div class="card-footer">
-        <div data-ng-show="allPagesNumbers.length > 1">
-            <ul class="pagination pagination-sm justify-content-center">
-             <li class="page-item" ng-repeat="pageNumber in pagesToShow track by $index" ng-class="{active: is_page_active(pageNumber), disabled: should_be_disabled(pageNumber)}">
-                 <div ng-click="select_page(pageNumber)" class="page-link" href="#">{{ pageNumber }}</div>
-             </li>
-        </ul>
+        <div data-ng-show="files.length > pagination.itemsPerPage">
+            <div class="justify-content-center">
+                <ul uib-pagination
+                    class="pagination-sm"
+                    ng-change="pageChanged()"
+                    total-items="files.length"
+                    max-size="pagination.maxSize"
+                    items-per-page="pagination.itemsPerPage"
+                    ng-model="pagination.currentPage"
+                    boundary-links="true"
+                    rotate="true"></ul>
+            </div>
         </div>
-
-
     </div>
 </div>
 
