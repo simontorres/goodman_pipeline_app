@@ -85,6 +85,10 @@ app.get('/admin', (req, res) => {
     res.sendFile(__dirname + '/client/views/admin.html');
 });
 
+app.get('/signup', (req, res) => {
+    res.sendFile(__dirname + '/client/views/signup.html');
+});
+
 // app.get('/raw_table', (req, res) => {
 //     res.sendFile(__dirname + '/client/views/raw_table.html');
 // });
