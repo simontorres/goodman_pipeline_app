@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="alert alert-warning alert-dismissible" role="alert" ng-if="message !== ''">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+          {{message}}
+  </div>
+    <div class="alert alert-info alert-dismissible" role="alert2">
+      <button type="button" class="close" data-dismiss="alert2" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+          This area is only visible when authenticated
+  </div>
+  <div ng-if="books">
+    <h1>Book List</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ISBN</th>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Publisher</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="book in books track by $index">
+          <td>{{ book.isbn }}</td>
+          <td>{{ book.title }}</td>
+          <td>{{ book.author }}</td>
+          <td>{{ book.publisher }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<div class="container">
+  <form name="addBookForm">
+    <input type="text" placeholder="ISBN" ng-model="newBook.isbn" name="isbn">
+    <input type="text" placeholder="Title" ng-model="newBook.title" name="title">
+    <input type="text" placeholder="Author" ng-model="newBook.author" name="author">
+    <input type="text" placeholder="Publisher" ng-model="newBook.publisher" name="publisher">
+    <button class="btn btn-primary" ng-click="addBook()">Add Book</button>
+  </form>
+</div>

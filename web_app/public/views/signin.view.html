@@ -1,0 +1,55 @@
+<!-- The Modal -->
+<div class="modal-content">
+
+  <!-- Modal Header -->
+  <div class="modal-header">
+    <h4 class="modal-title">Sign In</h4>
+    <button type="button" class="close" ng-click="cancel()">x</button>
+
+  </div>
+  <form name="loginForm">
+  <!-- Modal body -->
+  <div class="modal-body">
+      <div class="alert alert-warning alert-dismissible" role="alert" ng-if="message !== ''">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          {{message}}
+        </div>
+
+        <div class="form-label-group">
+            <label for="inputEmail">Email address</label>
+            <input name="username"
+                   type="email"
+                   id="inputEmail"
+                   class="form-control"
+                   placeholder="Email address"
+                   ng-model="signinData.username"
+                   required autofocus>
+        </div>
+
+        <div class="form-label-group">
+            <label for="inputPassword">Password</label>
+            <input name="password"
+                   type="password"
+                   id="inputPassword"
+                   class="form-control"
+                   placeholder="Password"
+                   ng-model="signinData.password"
+                   required>
+        </div>
+
+  </div>
+
+  <!-- Modal footer -->
+  <div class="modal-footer">
+      <button class="btn btn-primary"
+              type="button"
+              ng-disabled="!loginForm.$valid"
+              ng-click="signin()">Sign In</button>
+      <button class="btn btn-warning"
+              type="button"
+              ng-click="cancel()">Cancel</button>
+  </div>
+  </form>
+</div>
+
+
