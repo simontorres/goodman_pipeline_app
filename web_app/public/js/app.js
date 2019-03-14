@@ -6,13 +6,13 @@ app.config(function ($routeProvider, $locationProvider) {
             templateUrl: '/views/index.view.html',
             controller: 'indexController'
         })
-        .when("/books", {
-            templateUrl: '/views/books.view.html',
-            controller: "booksController"
+        .when("/settings", {
+            templateUrl: '/views/settings.view.html',
+            controller: "settingsController"
         })
-        .when("/signin", {
-            templateUrl: '/views/signin.view.html',
-            controller: 'signinController'
+        .when("/live", {
+            templateUrl: '/views/live.view.html',
+            controller: 'liveController'
         })
         .when("/signup", {
             templateUrl: '/views/signup.view.html',
@@ -25,15 +25,15 @@ app.config(function ($routeProvider, $locationProvider) {
 });
 
 
-app.factory('authStatus', function () {
-    var status = false;
-
-    return {
-        getAuthStatus: function () {
-            return status;
-        },
-        setAuthStatus: function (newStatus) {
-            status = newStatus;
-        }
-    }
-});
+// app.factory('authStatus', function () {
+//     var status = false;
+//
+//     return {
+//         getAuthStatus: function () {
+//             return status;
+//         },
+//         setAuthStatus: function (newStatus) {
+//             status = newStatus;
+//         }
+//     }
+// });
