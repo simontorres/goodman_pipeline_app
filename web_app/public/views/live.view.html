@@ -1,0 +1,64 @@
+<div class="container" >
+    <div class="alert alert-info alert-dismissible" role="alert" ng-if="message !== ''">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+          {{ message }}
+    </div>
+</div>
+
+
+<div class="container-fluid">
+    <div class="row flex-xl-nowrap" ng-if="files.length > 0">
+        <div class="col-12 col-md-4 col-xl-3">
+            <div class="card">
+                <div class="card-header">
+                    <span style="float: left;">
+                        Observed Files  <span class="badge badge-primary">{{ files.length }}</span>
+                    </span>
+                    <span style="float: right">
+                        Follow <input type="checkbox" ng-model="follow" ng-click="activate_follow()">
+                    </span>
+                </div>
+                <div class="card-body scrollable">
+                    <nav class="flex-column" >
+                        <div class="list-group list-group-flush">
+                            <div class="nav-item" ng-repeat="file in files.slice(pagination.pageStart, pagination.pageEnd)">
+                                <a  ng-href="#" class="list-group-item list-group-item-action" ng-class="{active: is_file_selected(file)}">
+                                <div ng-click="select_file(file)">{{ file.file_name }}</div>
+                               </a>
+                           </div>
+                        </div>
+                    </nav>
+                </div>
+                <div class="card-footer">
+                    <div data-ng-show="files.length > pagination.itemsPerPage">
+                        <div class="justify-content-center">
+                            <ul uib-pagination
+                                class="pagination-sm"
+                                ng-change="pageChanged()"
+                                total-items="files.length"
+                                max-size="pagination.maxSize"
+                                items-per-page="pagination.itemsPerPage"
+                                ng-model="pagination.currentPage"
+                                boundary-links="true"
+                                rotate="true"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 col-xl-9" id="file_detail">
+                <div class="card">
+                    <div class="card-header">
+                        Detailed Info For: {{ selected_file.file_name }}
+                    </div>
+                    <div class="card-body">
+                        <li ng-repeat="(attribute, value) in selected_file">
+                                {{ attribute }}: {{ value }}
+                        </li>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
