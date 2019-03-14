@@ -5,14 +5,28 @@ require('../config/passport')(passport);
 var express = require('express');
 var jwt = require('jsonwebtoken');
 var router = express.Router();
+var request = require('request');
 
 var User = require('../models/User');
 var Book = require('../models/Book');
+// var File = require('../models/File');
 
 /* GET home page */
 router.get('/', function (req, res, next) {
     res.send('Express RESTful API')
 });
+
+router.get('/files', passport.authenticate('jwt', {session: false}), function(req, res) {
+    request.get({url: 'http://api:8080/api/files', json:true}, function (error, response, data)  {
+        if (error) {
+            throw error;
+        }
+
+        res.json({success: true, files: data});
+
+    });
+});
+
 
 
 router.post('/signup', function (req, res) {
