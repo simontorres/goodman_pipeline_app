@@ -52,11 +52,11 @@ services:
     links:
       - db
 
-  web:
+  app:
     build:
-      context: web
+      context: web_app
     ports:
-      - "3000:8080"
+      - "3000:3000"
     depends_on:
       - rabbit
     restart: always

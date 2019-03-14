@@ -76,14 +76,14 @@ app.use('/css', express.static(__dirname + '/client/css'));
 
 // App
 
-app.get('/', (req, res) => {
-    console.log(__dirname);
-    res.sendFile(__dirname + '/client/views/index.html');
-  });
-
-app.get('/admin', (req, res) => {
-    res.sendFile(__dirname + '/client/views/admin.html');
-});
+// app.get('/', (req, res) => {
+//     console.log(__dirname);
+//     res.sendFile(__dirname + '/client/views/index.html');
+//   });
+//
+// app.get('/admin', (req, res) => {
+//     res.sendFile(__dirname + '/client/views/admin.html');
+// });
 
 app.get('/signup', (req, res) => {
     res.sendFile(__dirname + '/client/views/signup.html');

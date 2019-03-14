@@ -12,6 +12,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-resource.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-route.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-touch.js"></script>
     <!--<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-3.0.6.js"></script>-->
@@ -20,6 +21,7 @@
     <script type="text/javascript" src="/js/controllers/file-watch-controller.js"></script>
 </head>
 <body>
+<div ng-view></div>
 
 <ng-include src="'views/navbar.html'"></ng-include>
 <div ng-if="!files.length">
