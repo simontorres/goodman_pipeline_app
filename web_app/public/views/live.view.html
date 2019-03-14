@@ -54,9 +54,10 @@
                         Detailed Info For: {{ selected_file.file_name }}
                     </div>
                     <div class="card-body">
-                        <li ng-repeat="(attribute, value) in selected_file">
-                                {{ attribute }}: {{ value }}
-                        </li>
+                        <!--<li ng-repeat="(attribute, value) in selected_file">-->
+                                <!--{{ attribute }}: {{ value }}-->
+                        <!--</li>-->
+                        <ng-include src="'views/testing_fits.html'"></ng-include>
                     </div>
                 </div>
         </div>
