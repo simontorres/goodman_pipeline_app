@@ -170,7 +170,7 @@ app.controller('booksController', function ($scope, $http, $location, $window) {
 });
 
 
-app.controller('liveController', function ($scope, $resource, $http, $location, $window) {
+app.controller('liveController', function ($scope, $resource, $http, $location, $window, $interval) {
     $scope.follow = true;
     $scope.message = '';
     $scope.pagination = {
@@ -233,5 +233,10 @@ app.controller('liveController', function ($scope, $resource, $http, $location, 
         $scope.follow = !$scope.follow;
     };
 
-    $scope.update_data();
+    // $scope.update_data();
+    // on production this should not work like this
+    var promise = $interval($scope.update_data, 3000);
+    $scope.$on('$destroy', function(){
+        if(promise) $interval.cancel(promise);
+    });
 });
