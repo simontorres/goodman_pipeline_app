@@ -1,4 +1,4 @@
 module.exports = {
     'secret': 'meansecure',
-    'database': 'mongodb://db/mean-secure'
+    'database': 'mongodb://db/authenticated-app'
 };
